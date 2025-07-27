@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supplier Dashboard</title>
+</head>
+<body>
+<h2>Supplier Dashboard</h2>
+<form action="/supplier/upload-item" method="POST">
+  <input name="item_name" placeholder="Item Name" required>
+  <input name="price" placeholder="Price" required>
+  <input type="hidden" name="supplier_id" value="<%= supplierId %>">
+  <button type="submit">Add Item</button>
+</form>
+</body>
+</html>
