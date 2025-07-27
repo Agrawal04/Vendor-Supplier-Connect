@@ -1,0 +1,52 @@
+// // const mysql = require('mysql2');
+// // const dotenv = require('dotenv');
+// // dotenv.config();
+
+// // const db = mysql.createConnection({
+// //   host: process.env.DB_HOST,
+// //   user: process.env.DB_USER,
+// //   password: process.env.DB_PASS,
+// //   database: process.env.DB_NAME
+// // });
+
+// // db.connect(err => {
+// //   if (err) throw err;
+// //   console.log('MySQL Connected');
+// // });
+
+// // module.exports = db;
+
+
+// const mysql = require('mysql2');
+
+// const connection = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME,
+//   port: process.env.DB_PORT,
+// });
+
+// connection.connect((err) => {
+//   if (err) {
+//     console.error('DB connection error:', err);
+//   } else {
+//     console.log('Connected to MySQL');
+//   }
+// });
+
+// module.exports = connection;
+
+
+const mysql = require('mysql2');
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'bazaarbuddy'
+});
+connection.connect(err => {
+    if (err) throw err;
+    console.log('Connected to MySQL');
+});
+module.exports = connection;
