@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VendorConnect - Sourcing Solution for Street Food Vendors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #1f6340;
+            --secondary: #FFA500;
+            --light: #f5f9f7;
+            --dark: #1a2e22;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .notification-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        
+        .notification-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .user-actions button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-left: 1rem;
+        }
+        
+        .user-actions button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-left: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(46, 139, 87, 0.9), rgba(46, 139, 87, 0.8)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .cta-buttons button {
+            padding: 0.8rem 2.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-primary {
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .cta-buttons button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Dashboard Section */
+        .dashboard {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-header h2 {
+            font-size: 2rem;
+            color: var(--dark);
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-info {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Supplier Section */
+        .suppliers-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .search-bar {
+            display: flex;
+            background: var(--light-gray);
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            width: 300px;
+        }
+        
+        .search-bar input {
+            background: transparent;
+            border: none;
+            width: 100%;
+            padding: 0.5rem;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: var(--light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .suppliers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .supplier-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            background: white;
+        }
+        
+        .supplier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .supplier-img {
+            height: 180px;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80') center center/cover;
+        }
+        
+        .supplier-info {
+            padding: 1.5rem;
+        }
+        
+        .supplier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .supplier-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .rating {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .supplier-location {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .supplier-location i {
+            margin-right: 5px;
+        }
+        
+        .supplier-products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .product-tag {
+            background: var(--light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .supplier-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .delivery-info {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .order-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .order-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Order Tracking Section */
+        .tracking-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+        
+        .order-card {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .order-card:last-child {
+            border-bottom: none;
+        }
+        
+        .order-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80') center center/cover;
+            margin-right: 1.5rem;
+        }
+        
+        .order-details {
+            flex: 1;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .order-id {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .order-status {
+            background: #ffedcc;
+            color: #e67700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .order-status.delivered {
+            background: #d3f9d8;
+            color: #2b8a3e;
+        }
+        
+        .order-status.cancelled {
+            background: #ffe3e3;
+            color: #c92a2a;
+        }
+        
+        .order-info {
+            display: flex;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .order-info div {
+            margin-right: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .order-info i {
+            margin-right: 5px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            width: 75%;
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-body {
+            margin-bottom: 2rem;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        
+        .modal-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .modal-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .modal-btn.secondary {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        /* Notification Panel */
+        .notification-panel {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .notification-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notification-list {
+            list-style: none;
+        }
+        
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .notification-item:hover {
+            background: var(--light);
+        }
+        
+        .notification-item.unread {
+            background: rgba(46, 139, 87, 0.05);
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .notification-time {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        /* Price Comparison */
+        .price-comparison {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .comparison-table th {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .best-price {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+            font-weight: 600;
+            border-radius: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #adb5bd;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin: 1rem 0;
+            }
+            
+            .user-actions {
+                margin-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            .notification-panel {
+                width: 90%;
+                right: 5%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .suppliers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>VendorConnect</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Suppliers</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Payments</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+            <div class="user-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </button>
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                    <span>Raj Sharma</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button id="clearNotifications">Clear All</button>
+        </div>
+        <ul class="notification-list" id="notificationList">
+            <li class="notification-item unread">
+                <div class="notification-title">Order #VC1289 is on the way!</div>
+                <div class="notification-desc">Your order from Fresh Farms is 75% delivered</div>
+                <div class="notification-time">10 mins ago</div>
+            </li>
+            <li class="notification-item unread">
+                <div class="notification-title">New Supplier Available!</div>
+                <div class="notification-desc">Spice King has joined VendorConnect</div>
+                <div class="notification-time">2 hours ago</div>
+            </li>
+            <li class="notification-item">
+                <div class="notification-title">Payment Received</div>
+                <div class="notification-desc">₹2,850 received for Order #VC1285</div>
+                <div class="notification-time">Yesterday</div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Source Fresh Ingredients from Trusted Suppliers</h1>
+            <p>Connect directly with verified suppliers, compare prices, and get reliable deliveries for your street food business</p>
+            <div class="cta-buttons">
+                <button class="cta-primary" id="findSuppliers">Find Suppliers Now</button>
+                <button class="cta-secondary">How It Works</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard">
+        <div class="dashboard-header">
+            <h2>Your Dashboard</h2>
+            <div>Last updated: <span id="currentTime">Today, 10:30 AM</span></div>
+        </div>
+        
+        <div class="dashboard-cards">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="card-title">Active Orders</div>
+                </div>
+                <div class="card-value" id="activeOrders">4</div>
+                <div class="card-info">2 orders to be delivered today</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="card-title">Monthly Savings</div>
+                </div>
+                <div class="card-value" id="monthlySavings">₹1,850</div>
+                <div class="card-info">Compared to last month</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="card-title">Preferred Suppliers</div>
+                </div>
+                <div class="card-value" id="preferredSuppliers">8</div>
+                <div class="card-info">Trusted suppliers near you</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="card-title">Order Completion</div>
+                </div>
+                <div class="card-value" id="orderCompletion">92%</div>
+                <div class="card-info">On-time delivery rate</div>
+            </div>
+        </div>
+        
+        <!-- Suppliers Section -->
+        <div class="suppliers-section">
+            <div class="section-header">
+                <h3>Recommended Suppliers</h3>
+                <div class="search-bar">
+                    <input type="text" id="supplierSearch" placeholder="Search for suppliers or products...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="filter-options">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="vegetables">Vegetables</button>
+                <button class="filter-btn" data-filter="spices">Spices</button>
+                <button class="filter-btn" data-filter="dairy">Dairy</button>
+                <button class="filter-btn" data-filter="grains">Grains</button>
+            </div>
+            
+            <div class="suppliers-grid" id="suppliersGrid">
+                <!-- Suppliers will be dynamically populated -->
+            </div>
+        </div>
+        
+        <!-- Price Comparison Section -->
+        <div class="price-comparison">
+            <div class="section-header">
+                <h3>Price Comparison</h3>
+                <div>Compare prices for common items</div>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Fresh Farms</th>
+                        <th>Spice King</th>
+                        <th>Daily Dairy</th>
+                        <th>Local Market Avg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tomatoes (1kg)</td>
+                        <td class="best-price">₹28</td>
+                        <td>₹32</td>
+                        <td>₹30</td>
+                        <td>₹35</td>
+                    </tr>
+                    <tr>
+                        <td>Onions (1kg)</td>
+                        <td>₹22</td>
+                        <td>₹25</td>
+                        <td class="best-price">₹20</td>
+                        <td>₹28</td>
+                    </tr>
+                    <tr>
+                        <td>Turmeric Powder (100g)</td>
+                        <td>₹35</td>
+                        <td class="best-price">₹30</td>
+                        <td>₹40</td>
+                        <td>₹45</td>
+                    </tr>
+                    <tr>
+                        <td>Fresh Milk (1L)</td>
+                        <td>₹50</td>
+                        <td>₹52</td>
+                        <td class="best-price">₹48</td>
+                        <td>₹55</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Order Tracking Section -->
+        <div class="tracking-section">
+            <div class="section-header">
+                <h3>Recent Orders</h3>
+                <button class="order-btn" id="viewAllOrders">View All Orders</button>
+            </div>
+            
+            <div class="orders-list" id="ordersList">
+                <!-- Orders will be dynamically populated -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Order Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-header">
+                <h3>Place Your Order</h3>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be dynamically populated -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" id="cancelOrder">Cancel</button>
+                <button class="modal-btn primary" id="confirmOrder">Confirm Order</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>VendorConnect</h4>
+                <p>Empowering street food vendors with reliable access to quality ingredients at competitive prices.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">For Vendors</a></li>
+                    <li><a href="#">For Suppliers</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Support Center</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Vendor Resources</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>123 Business Street, Mumbai, India 400001</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 98765 43210</span>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>support@vendorconnect.in</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 VendorConnect. All rights reserved. | Designed with ❤️ for India's Street Food Heroes</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data structures
+        const suppliers = [
+            {
+                id: 1,
+                name: "Fresh Farms Produce",
+                rating: 4.7,
+                reviews: 128,
+                distance: "2.4 km",
+                location: "Andheri West",
+                products: ["Vegetables", "Fruits", "Herbs"],
+                delivery: "Same-day delivery",
+                deliveryIcon: "bolt",
+                image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80",
+                category: "vegetables"
+            },
+            {
+                id: 2,
+                name: "Spice King Wholesale",
+                rating: 4.8,
+                reviews: 94,
+                distance: "3.1 km",
+                location: "Dadar East",
+                products: ["Spices", "Dry Fruits", "Flours"],
+                delivery: "Next-day delivery",
+                deliveryIcon: "shipping-fast",
+                image: "https://images.unsplash.com/photo-1556911220-ef412aedc5c6?auto=format&fit=crop&w=600&q=80",
+                category: "spices"
+            },
+            {
+                id: 3,
+                name: "Daily Dairy Products",
+                rating: 4.5,
+                reviews: 76,
+                distance: "1.8 km",
+                location: "Bandra",
+                products: ["Milk", "Paneer", "Curd", "Ghee"],
+                delivery: "Same-day delivery",
+                deliveryIcon: "bolt",
+                image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=600&q=80",
+                category: "dairy"
+            },
+            {
+                id: 4,
+                name: "Grain Masters",
+                rating: 4.3,
+                reviews: 63,
+                distance: "4.2 km",
+                location: "Vile Parle",
+                products: ["Rice", "Wheat", "Lentils", "Flour"],
+                delivery: "Next-day delivery",
+                deliveryIcon: "shipping-fast",
+                image: "https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&w=600&q=80",
+                category: "grains"
+            }
+        ];
+
+        const orders = [
+            {
+                id: "VC1289",
+                supplier: "Fresh Farms Produce",
+                date: "Today, 7:00 AM",
+                items: "Tomatoes (5kg), Onions (10kg), Potatoes (15kg), Coriander (2kg)",
+                status: "in-transit",
+                progress: 75,
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80"
+            },
+            {
+                id: "VC1285",
+                supplier: "Spice King Wholesale",
+                date: "Yesterday, 9:30 AM",
+                items: "Turmeric Powder (2kg), Red Chili Powder (3kg), Cumin Seeds (1kg)",
+                status: "delivered",
+                image: "https://images.unsplash.com/photo-1601643157091-ce5c665179ab?auto=format&fit=crop&w=200&q=80"
+            },
+            {
+                id: "VC1279",
+                supplier: "Daily Dairy Products",
+                date: "2 days ago, 6:00 AM",
+                items: "Fresh Milk (20L), Paneer (5kg), Curd (10kg)",
+                status: "delivered",
+                image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=200&q=80"
+            }
+        ];
+
+        // DOM Elements
+        const suppliersGrid = document.getElementById('suppliersGrid');
+        const ordersList = document.getElementById('ordersList');
+        const notificationBtn = document.querySelector('.notification-btn');
+        const notificationPanel = document.getElementById('notificationPanel');
+        const clearNotifications = document.getElementById('clearNotifications');
+        const notificationList = document.getElementById('notificationList');
+        const notificationCount = document.querySelector('.notification-count');
+        const orderModal = document.getElementById('orderModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeModal = document.getElementById('closeModal');
+        const cancelOrder = document.getElementById('cancelOrder');
+        const confirmOrder = document.getElementById('confirmOrder');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const supplierSearch = document.getElementById('supplierSearch');
+        const activeOrders = document.getElementById('activeOrders');
+        const monthlySavings = document.getElementById('monthlySavings');
+        const preferredSuppliers = document.getElementById('preferredSuppliers');
+        const orderCompletion = document.getElementById('orderCompletion');
+        const currentTime = document.getElementById('currentTime');
+
+        // Initialize the app
+        function init() {
+            renderSuppliers();
+            renderOrders();
+            updateDashboard();
+            updateDateTime();
+            setInterval(updateDateTime, 60000); // Update time every minute
+            setInterval(updateDashboard, 30000); // Update dashboard metrics every 30 seconds
+        }
+
+        // Render suppliers to the grid
+        function renderSuppliers() {
+            suppliersGrid.innerHTML = '';
+            suppliers.forEach(supplier => {
+                const supplierCard = document.createElement('div');
+                supplierCard.className = 'supplier-card';
+                supplierCard.dataset.category = supplier.category;
+                
+                supplierCard.innerHTML = `
+                    <div class="supplier-img" style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('${supplier.image}') center center/cover;"></div>
+                    <div class="supplier-info">
+                        <div class="supplier-header">
+                            <div class="supplier-name">${supplier.name}</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i> ${supplier.rating} (${supplier.reviews})
+                            </div>
+                        </div>
+                        <div class="supplier-location">
+                            <i class="fas fa-map-marker-alt"></i> ${supplier.distance} away, ${supplier.location}
+                        </div>
+                        <div class="supplier-products">
+                            ${supplier.products.map(product => `<div class="product-tag">${product}</div>`).join('')}
+                        </div>
+                        <div class="supplier-footer">
+                            <div class="delivery-info">
+                                <i class="fas fa-${supplier.deliveryIcon}"></i> ${supplier.delivery}
+                            </div>
+                            <button class="order-btn" data-supplier-id="${supplier.id}">Order Now</button>
+                        </div>
+                    </div>
+                `;
+                suppliersGrid.appendChild(supplierCard);
+            });
+            
+            // Add event listeners to order buttons
+            document.querySelectorAll('.order-btn[data-supplier-id]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const supplierId = this.dataset.supplierId;
+                    const supplier = suppliers.find(s => s.id == supplierId);
+                    openOrderModal(supplier);
+                });
+            });
+        }
+
+        // Render orders to the list
+        function renderOrders() {
+            ordersList.innerHTML = '';
+            orders.forEach(order => {
+                const orderCard = document.createElement('div');
+                orderCard.className = 'order-card';
+                
+                orderCard.innerHTML = `
+                    <div class="order-img" style="background: url('${order.image}') center center/cover;"></div>
+                    <div class="order-details">
+                        <div class="order-header">
+                            <div class="order-id">Order #${order.id}</div>
+                            <div class="order-status ${order.status === 'delivered' ? 'delivered' : ''}">
+                                ${order.status === 'in-transit' ? 'In Transit' : 'Delivered'}
+                            </div>
+                        </div>
+                        <div class="order-info">
+                            <div><i class="fas fa-store"></i> ${order.supplier}</div>
+                            <div><i class="fas fa-calendar"></i> ${order.date}</div>
+                        </div>
+                        <div>${order.items}</div>
+                        ${order.status === 'in-transit' ? 
+                            `<div class="progress-bar">
+                                <div class="progress" style="width: ${order.progress}%"></div>
+                            </div>` : ''
+                        }
+                    </div>
+                `;
+                ordersList.appendChild(orderCard);
+            });
+        }
+
+        // Update dashboard metrics
+        function updateDashboard() {
+            // Simulate real-time data changes
+            const newActiveOrders = Math.floor(Math.random() * 2) + 3; // 3-4
+            const newMonthlySavings = Math.floor(Math.random() * 500) + 1600; // 1600-2100
+            const newPreferredSuppliers = Math.floor(Math.random() * 2) + 7; // 7-8
+            const newOrderCompletion = Math.floor(Math.random() * 4) + 90; // 90-93
+            
+            activeOrders.textContent = newActiveOrders;
+            monthlySavings.textContent = `₹${newMonthlySavings.toLocaleString()}`;
+            preferredSuppliers.textContent = newPreferredSuppliers;
+            orderCompletion.textContent = `${newOrderCompletion}%`;
+        }
+
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            currentTime.textContent = now.toLocaleDateString('en-IN', options);
+        }
+
+        // Open order modal
+        function openOrderModal(supplier) {
+            modalBody.innerHTML = `
+                <div class="supplier-info">
+                    <div class="supplier-header">
+                        <div class="supplier-name">${supplier.name}</div>
+                        <div class="rating">
+                            <i class="fas fa-star"></i> ${supplier.rating} (${supplier.reviews})
+                        </div>
+                    </div>
+                    <div class="supplier-location">
+                        <i class="fas fa-map-marker-alt"></i> ${supplier.distance} away, ${supplier.location}
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <h4 style="margin-bottom: 1rem;">Place Your Order</h4>
+                        <div class="order-form">
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Select Items</label>
+                                <select style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid var(--light-gray);">
+                                    <option>Tomatoes (₹28/kg)</option>
+                                    <option>Onions (₹22/kg)</option>
+                                    <option>Potatoes (₹25/kg)</option>
+                                    <option>Coriander (₹20/bunch)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Quantity</label>
+                                <div style="display: flex; align-items: center;">
+                                    <button style="background: var(--light-gray); border: none; width: 30px; height: 30px; border-radius: 50%;">-</button>
+                                    <input type="number" value="1" min="1" style="width: 60px; text-align: center; margin: 0 0.5rem; padding: 0.5rem; border: 1px solid var(--light-gray); border-radius: 8px;">
+                                    <button style="background: var(--light-gray); border: none; width: 30px; height: 30px; border-radius: 50%;">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Delivery Time</label>
+                                <select style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid var(--light-gray);">
+                                    <option>Today Morning (6AM-9AM)</option>
+                                    <option>Today Afternoon (12PM-3PM)</option>
+                                    <option>Today Evening (4PM-7PM)</option>
+                                    <option>Tomorrow Morning</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            orderModal.style.display = 'flex';
+        }
+
+        // Close order modal
+        function closeOrderModal() {
+            orderModal.style.display = 'none';
+        }
+
+        // Filter suppliers by category
+        function filterSuppliers(category) {
+            const supplierCards = document.querySelectorAll('.supplier-card');
+            
+            supplierCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Search suppliers
+        function searchSuppliers(query) {
+            const supplierCards = document.querySelectorAll('.supplier-card');
+            const lowerQuery = query.toLowerCase();
+            
+            supplierCards.forEach(card => {
+                const name = card.querySelector('.supplier-name').textContent.toLowerCase();
+                const products = card.querySelector('.supplier-products').textContent.toLowerCase();
+                
+                if (name.includes(lowerQuery) || products.includes(lowerQuery)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle notification panel
+        function toggleNotificationPanel() {
+            if (notificationPanel.style.display === 'block') {
+                notificationPanel.style.display = 'none';
+            } else {
+                notificationPanel.style.display = 'block';
+                // Mark notifications as read
+                document.querySelectorAll('.notification-item.unread').forEach(item => {
+                    item.classList.remove('unread');
+                });
+                notificationCount.textContent = '0';
+            }
+        }
+
+        // Clear notifications
+        function clearAllNotifications() {
+            notificationList.innerHTML = '<li class="notification-item">No notifications</li>';
+            notificationCount.textContent = '0';
+        }
+
+        // Event Listeners
+        notificationBtn.addEventListener('click', toggleNotificationPanel);
+        clearNotifications.addEventListener('click', clearAllNotifications);
+        closeModal.addEventListener('click', closeOrderModal);
+        cancelOrder.addEventListener('click', closeOrderModal);
+        confirmOrder.addEventListener('click', function() {
+            alert('Order placed successfully! The supplier will contact you shortly.');
+            closeOrderModal();
+        });
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterSuppliers(this.dataset.filter);
+            });
+        });
+        
+        supplierSearch.addEventListener('input', function() {
+            searchSuppliers(this.value);
+        });
+        
+        document.getElementById('findSuppliers').addEventListener('click', function() {
+            document.querySelector('.suppliers-section').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        document.getElementById('viewAllOrders').addEventListener('click', function() {
+            document.querySelector('.tracking-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === orderModal) {
+                closeOrderModal();
+            }
+            if (event.target !== notificationBtn && !notificationBtn.contains(event.target) ){
+                notificationPanel.style.display = 'none';
+            }
+        });
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
